@@ -1,11 +1,11 @@
-#include<iostream>
-#include<stdio.h>
+#include"TPADLL.h"
 #include"pch.h"
 #include"framework.h"
-#include"TPADLL.h"
 #include"Thorlabs.MotionControl.TCube.Quad.h"
-using namespace std;
+#include<iostream>
+#include<stdio.h>
 
+using namespace std;
 //get device list num
 int GetDeviceListNum() {
 	short num = TLI_GetDeviceListSize();
@@ -36,7 +36,7 @@ TLI_DeviceInfo GetDeviceInfo(int index) {
 //get divice description infomation
 char* GetDeviceDescriptionInfo(TLI_DeviceInfo deviceInfo) {
 	char desc[65];
-	strncpy(desc, deviceInfo.description, 64);
+	strncpy_s(desc, deviceInfo.description, 64);
 	desc[64] = '\0';
 	return desc;
 }
@@ -44,7 +44,7 @@ char* GetDeviceDescriptionInfo(TLI_DeviceInfo deviceInfo) {
 //get device serial number
 char* GetDeviceSerialNumber(TLI_DeviceInfo deviceInfo) {
 	char serialNo[9];
-	strncpy(serialNo, deviceInfo.serialNo, 8);
+	strncpy_s(serialNo, deviceInfo.serialNo, 8);
 	serialNo[8] = '\0';
 	return serialNo;
 }
@@ -116,7 +116,6 @@ void stopPolling(const char* serialNo) {
 }
 
 //set operation mode {"openLoop","closeLoop","monitor"}
-
 bool setOperationMode(const char* serialNo,const char* mode) {
 	//char testSerialNo[16];
 	//sprintf_s(testSerialNo, "%d", serialNo);
